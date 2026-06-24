@@ -1,4 +1,3 @@
-// api/index.js
 const express = require('express');
 const axios = require('axios');
 const cors = require('cors');
@@ -9,13 +8,13 @@ const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
-// Middleware để log
+// Middleware log
 app.use((req, res, next) => {
     console.log(`[${new Date().toISOString()}] ${req.method} ${req.url}`);
     next();
 });
 
-// Hàm tạo popup HTML
+// ============ HÀM TẠO POPUP ============
 function createPopupHTML(routeName = '') {
     const displayName = routeName ? routeName.replace(/^\//, '').replace(/-/g, ' ').toUpperCase() : 'HỆ THỐNG';
     
@@ -187,7 +186,7 @@ function createPopupHTML(routeName = '') {
     `;
 }
 
-// Hàm xử lý fetch và fix HTML
+// ============ HÀM FETCH HTML ============
 async function fetchAndFixHtml(targetUrl, baseUrl = 'https://minhtuanxrophim.vercel.app', routeName = '') {
     const response = await axios.get(targetUrl, {
         headers: {
@@ -252,7 +251,7 @@ async function fetchAndFixHtml(targetUrl, baseUrl = 'https://minhtuanxrophim.ver
     return html;
 }
 
-// Route proxy chính
+// ============ ROUTE PROXY ============
 app.get('/proxy', async (req, res) => {
     try {
         let targetUrl = req.query.url;
@@ -296,9 +295,9 @@ app.get('/proxy', async (req, res) => {
 });
 
 // ============ ROUTE CHO IMAGES ============
-app.get('/images/*path', async (req, res) => {
+app.get('/images/*', async (req, res) => {
     try {
-        const imagePath = req.params.path || '';
+        const imagePath = req.params[0] || '';
         const targetUrl = `https://minhtuanxrophim.vercel.app/images/${imagePath}`;
         
         console.log(`🖼️ Đang lấy image: ${targetUrl}`);
@@ -322,10 +321,10 @@ app.get('/images/*path', async (req, res) => {
     }
 });
 
-// ============ ROUTE ĐỘNG CHO QUỐC GIA ============
-app.get('/quoc-gia/*path', async (req, res) => {
+// ============ ROUTE ĐỘNG CHO QUỐC GIA - FIX ============
+app.get('/quoc-gia/:country', async (req, res) => {
     try {
-        const countryPath = req.params.path || '';
+        const countryPath = req.params.country || '';
         const targetUrl = `https://minhtuanxrophim.vercel.app/quoc-gia/${countryPath}`;
         const routeName = `/quoc-gia/${countryPath}`;
         
@@ -358,10 +357,10 @@ app.get('/quoc-gia/*path', async (req, res) => {
     }
 });
 
-// ============ ROUTE ĐỘNG CHO THỂ LOẠI ============
-app.get('/the-loai/*path', async (req, res) => {
+// ============ ROUTE ĐỘNG CHO THỂ LOẠI - FIX ============
+app.get('/the-loai/:genre', async (req, res) => {
     try {
-        const genrePath = req.params.path || '';
+        const genrePath = req.params.genre || '';
         const targetUrl = `https://minhtuanxrophim.vercel.app/the-loai/${genrePath}`;
         const routeName = `/the-loai/${genrePath}`;
         
@@ -391,6 +390,106 @@ app.get('/the-loai/*path', async (req, res) => {
             </body>
             </html>
         `);
+    }
+});
+
+// ============ CÁC ROUTE CỐ ĐỊNH ============
+const fixedRoutes = [
+    '/phimhay',
+    '/phim-le',
+    '/phim-bo',
+    '/hoi-dap',
+    '/chinh-sach-bao-mat',
+    '/dieu-khoan-su-dung',
+    '/gioi-thieu',
+    '/lien-he',
+    '/dongphim',
+    '/ghienphim',
+    '/motphim',
+    '/subnhanh',
+    '/phim',
+    '/the-loai',
+    '/quoc-gia',
+    '/tim-kiem'
+];
+
+fixedRoutes.forEach(route => {
+    app.get(route, async (req, res) => {
+        try {
+            const targetUrl = `https://minhtuanxrophim.vercel.app${route}`;
+            console.log(`🎬 Đang lấy: ${targetUrl}`);
+            
+            const html = await fetchAndFixHtml(targetUrl, 'https://minhtuanxrophim.vercel.app', route);
+            
+            res.setHeader('Content-Type', 'text/html; charset=utf-8');
+            res.setHeader('X-Frame-Options', 'ALLOWALL');
+            res.setHeader('Content-Security-Policy', "frame-ancestors *; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;");
+            res.setHeader('Access-Control-Allow-Origin', '*');
+            res.send(html);
+
+        } catch (error) {
+            console.error(`❌ Lỗi route ${route}:`, error.message);
+            res.status(500).send(`
+                <!DOCTYPE html>
+                <html>
+                <head><title>Lỗi</title></head>
+                <body style="font-family:Arial;text-align:center;padding:50px;background:#1a1a2e;color:white;">
+                    <h1 style="color:#ff6b6b;">⚠️ Lỗi tải trang</h1>
+                    <p>${error.message}</p>
+                    <p style="color:#888;font-size:14px;">Route: ${route}</p>
+                    <button onclick="location.reload()" style="padding:10px 30px;background:#00ff99;border:none;border-radius:5px;cursor:pointer;margin-top:20px;">Thử lại</button>
+                    <br><br>
+                    <a href="/" style="color:#00ccff;">Quay lại trang chủ</a>
+                </body>
+                </html>
+            `);
+        }
+    });
+});
+
+// ============ ROUTE PHIM ============
+app.get('/phim/:slug', async (req, res) => {
+    try {
+        const slug = req.params.slug;
+        const targetUrl = `https://minhtuanxrophim.vercel.app/phim/${slug}`;
+        const routeName = `/phim/${slug}`;
+        
+        console.log(`🎬 Đang lấy phim: ${targetUrl}`);
+        
+        const html = await fetchAndFixHtml(targetUrl, 'https://minhtuanxrophim.vercel.app', routeName);
+        
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('X-Frame-Options', 'ALLOWALL');
+        res.setHeader('Content-Security-Policy', "frame-ancestors *; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;");
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send(html);
+
+    } catch (error) {
+        console.error('❌ Lỗi phim:', error.message);
+        res.status(500).send(`Lỗi: ${error.message}`);
+    }
+});
+
+// ============ ROUTE XEM PHIM ============
+app.get('/xem-phim/:slug', async (req, res) => {
+    try {
+        const slug = req.params.slug;
+        const targetUrl = `https://minhtuanxrophim.vercel.app/xem-phim/${slug}`;
+        const routeName = `/xem-phim/${slug}`;
+        
+        console.log(`🎬 Đang lấy xem-phim: ${targetUrl}`);
+        
+        const html = await fetchAndFixHtml(targetUrl, 'https://minhtuanxrophim.vercel.app', routeName);
+        
+        res.setHeader('Content-Type', 'text/html; charset=utf-8');
+        res.setHeader('X-Frame-Options', 'ALLOWALL');
+        res.setHeader('Content-Security-Policy', "frame-ancestors *; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;");
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        res.send(html);
+
+    } catch (error) {
+        console.error('❌ Lỗi xem-phim:', error.message);
+        res.status(500).send(`Lỗi: ${error.message}`);
     }
 });
 
@@ -449,107 +548,7 @@ app.get('/sitemap.xml', async (req, res) => {
     }
 });
 
-// ============ CÁC ROUTE CỐ ĐỊNH ============
-const fixedRoutes = [
-    '/phimhay',
-    '/phim-le',
-    '/phim-bo',
-    '/hoi-dap',
-    '/chinh-sach-bao-mat',
-    '/dieu-khoan-su-dung',
-    '/gioi-thieu',
-    '/lien-he',
-    '/dongphim',
-    '/ghienphim',
-    '/motphim',
-    '/subnhanh',
-    '/phim',
-    '/the-loai',
-    '/quoc-gia',
-    '/tim-kiem'
-];
-
-fixedRoutes.forEach(route => {
-    app.get(route, async (req, res) => {
-        try {
-            const targetUrl = `https://minhtuanxrophim.vercel.app${route}`;
-            console.log(`🎬 Đang lấy: ${targetUrl}`);
-            
-            const html = await fetchAndFixHtml(targetUrl, 'https://minhtuanxrophim.vercel.app', route);
-            
-            res.setHeader('Content-Type', 'text/html; charset=utf-8');
-            res.setHeader('X-Frame-Options', 'ALLOWALL');
-            res.setHeader('Content-Security-Policy', "frame-ancestors *; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;");
-            res.setHeader('Access-Control-Allow-Origin', '*');
-            res.send(html);
-
-        } catch (error) {
-            console.error(`❌ Lỗi route ${route}:`, error.message);
-            res.status(500).send(`
-                <!DOCTYPE html>
-                <html>
-                <head><title>Lỗi</title></head>
-                <body style="font-family:Arial;text-align:center;padding:50px;background:#1a1a2e;color:white;">
-                    <h1 style="color:#ff6b6b;">⚠️ Lỗi tải trang</h1>
-                    <p>${error.message}</p>
-                    <p style="color:#888;font-size:14px;">Route: ${route}</p>
-                    <button onclick="location.reload()" style="padding:10px 30px;background:#00ff99;border:none;border-radius:5px;cursor:pointer;margin-top:20px;">Thử lại</button>
-                    <br><br>
-                    <a href="/" style="color:#00ccff;">Quay lại trang chủ</a>
-                </body>
-                </html>
-            `);
-        }
-    });
-});
-
-// Route phim với slug (động)
-app.get('/phim/:slug', async (req, res) => {
-    try {
-        const slug = req.params.slug;
-        const targetUrl = `https://minhtuanxrophim.vercel.app/phim/${slug}`;
-        const routeName = `/phim/${slug}`;
-        
-        console.log(`🎬 Đang lấy phim: ${targetUrl}`);
-        
-        const html = await fetchAndFixHtml(targetUrl, 'https://minhtuanxrophim.vercel.app', routeName);
-        
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.setHeader('X-Frame-Options', 'ALLOWALL');
-        res.setHeader('Content-Security-Policy', "frame-ancestors *; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;");
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.send(html);
-
-    } catch (error) {
-        console.error('❌ Lỗi phim:', error.message);
-        res.status(500).send(`Lỗi: ${error.message}`);
-    }
-});
-
-// Route xem-phim với slug (động)
-app.get('/xem-phim/:slug', async (req, res) => {
-    try {
-        const slug = req.params.slug;
-        const targetUrl = `https://minhtuanxrophim.vercel.app/xem-phim/${slug}`;
-        const routeName = `/xem-phim/${slug}`;
-        
-        console.log(`🎬 Đang lấy xem-phim: ${targetUrl}`);
-        
-        const html = await fetchAndFixHtml(targetUrl, 'https://minhtuanxrophim.vercel.app', routeName);
-        
-        res.setHeader('Content-Type', 'text/html; charset=utf-8');
-        res.setHeader('X-Frame-Options', 'ALLOWALL');
-        res.setHeader('Content-Security-Policy', "frame-ancestors *; default-src * 'unsafe-inline' 'unsafe-eval' data: blob:;");
-        res.setHeader('Access-Control-Allow-Origin', '*');
-        res.send(html);
-
-    } catch (error) {
-        console.error('❌ Lỗi xem-phim:', error.message);
-        res.status(500).send(`Lỗi: ${error.message}`);
-    }
-});
-
-// Trang chủ
+// ============ TRANG CHỦ ============
 app.get('/', (req, res) => {
     res.send(`
         <!DOCTYPE html>
@@ -703,7 +702,7 @@ app.get('/', (req, res) => {
     `);
 });
 
-// Route 404 - Bắt tất cả các route không tồn tại
+// ============ 404 ============
 app.use((req, res) => {
     res.status(404).send(`
         <!DOCTYPE html>
@@ -729,5 +728,5 @@ app.use((req, res) => {
     `);
 });
 
-// ============ QUAN TRỌNG: Export cho Vercel ============
+// ============ EXPORT CHO VERCEL ============
 module.exports = app;
