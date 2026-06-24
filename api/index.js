@@ -611,7 +611,7 @@ app.get('/', (req, res) => {
         <!DOCTYPE html>
         <html>
         <head>
-            <title>Proxy Server</title>
+            <title>CODE BY NHK</title>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <style>
@@ -632,7 +632,7 @@ app.get('/', (req, res) => {
                     background: rgba(255,255,255,0.03);
                     border-radius: 24px;
                     border: 1px solid rgba(255,255,255,0.08);
-                    max-width: 800px;
+                    max-width: 500px;
                     width: 100%;
                     position: relative;
                     overflow: hidden;
@@ -652,26 +652,150 @@ app.get('/', (req, res) => {
                     0%, 100% { transform: translate(0, 0) rotate(0deg); }
                     50% { transform: translate(5%, 5%) rotate(3deg); }
                 }
-                .logo { font-size: 72px; margin-bottom: 16px; display: block; animation: float 3s ease-in-out infinite; position: relative; z-index: 1; }
-                @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-                h1 { font-size: 42px; background: linear-gradient(135deg, #00ff99, #00ccff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; position: relative; z-index: 1; }
-                .status { color: #00ff99; font-size: 18px; margin: 16px 0; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 1; }
-                .status .dot { width: 10px; height: 10px; background: #00ff99; border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
-                @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
-                .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; text-align: left; position: relative; z-index: 1; }
-                .info-item { background: rgba(255,255,255,0.05); padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); transition: 0.3s; }
-                .info-item:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,255,153,0.2); }
-                .info-item .label { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
-                .info-item .value { color: #00ccff; font-family: monospace; font-size: 14px; margin-top: 6px; display: block; }
-                .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; position: relative; z-index: 1; }
-                .btn { padding: 14px 36px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s ease; border: none; text-decoration: none; display: inline-block; }
-                .btn-primary { background: linear-gradient(135deg, #00ff99, #00ccff); color: #000; }
-                .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,255,153,0.3); }
-                .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.12); }
-                .btn-secondary:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
-                .footer { margin-top: 28px; color: #555; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; position: relative; z-index: 1; }
-                .footer code { background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 4px; font-size: 12px; color: #888; }
-                .highlight { color: #00ff99; font-weight: bold; }
+                .logo { 
+                    font-size: 72px; 
+                    margin-bottom: 16px; 
+                    display: block; 
+                    animation: float 3s ease-in-out infinite; 
+                    position: relative; 
+                    z-index: 1; 
+                }
+                @keyframes float { 
+                    0%, 100% { transform: translateY(0); } 
+                    50% { transform: translateY(-10px); } 
+                }
+                h1 { 
+                    font-size: 42px; 
+                    background: linear-gradient(135deg, #00ff99, #00ccff); 
+                    -webkit-background-clip: text; 
+                    -webkit-text-fill-color: transparent; 
+                    margin-bottom: 12px; 
+                    position: relative; 
+                    z-index: 1; 
+                }
+                .status { 
+                    color: #00ff99; 
+                    font-size: 18px; 
+                    margin: 16px 0; 
+                    display: flex; 
+                    align-items: center; 
+                    justify-content: center; 
+                    gap: 8px; 
+                    position: relative; 
+                    z-index: 1; 
+                }
+                .status .dot { 
+                    width: 10px; 
+                    height: 10px; 
+                    background: #00ff99; 
+                    border-radius: 50%; 
+                    display: inline-block; 
+                    animation: pulse 2s infinite; 
+                }
+                @keyframes pulse { 
+                    0%, 100% { opacity: 1; } 
+                    50% { opacity: 0.3; } 
+                }
+                .info-grid { 
+                    display: grid; 
+                    grid-template-columns: 1fr; 
+                    gap: 12px; 
+                    margin: 24px 0; 
+                    text-align: left; 
+                    position: relative; 
+                    z-index: 1; 
+                }
+                .info-item { 
+                    background: rgba(255,255,255,0.05); 
+                    padding: 16px 20px; 
+                    border-radius: 12px; 
+                    border: 1px solid rgba(255,255,255,0.06); 
+                    transition: 0.3s; 
+                    text-align: center;
+                }
+                .info-item:hover { 
+                    background: rgba(255,255,255,0.08); 
+                    border-color: rgba(0,255,153,0.2); 
+                }
+                .info-item .label { 
+                    color: #888; 
+                    font-size: 12px; 
+                    text-transform: uppercase; 
+                    letter-spacing: 1px; 
+                }
+                .info-item .value { 
+                    color: #00ccff; 
+                    font-family: monospace; 
+                    font-size: 16px; 
+                    margin-top: 6px; 
+                    display: block; 
+                }
+                .btn-group { 
+                    display: flex; 
+                    gap: 12px; 
+                    justify-content: center; 
+                    flex-wrap: wrap; 
+                    margin-top: 24px; 
+                    position: relative; 
+                    z-index: 1; 
+                }
+                .btn { 
+                    padding: 14px 36px; 
+                    border-radius: 50px; 
+                    font-weight: 600; 
+                    font-size: 15px; 
+                    cursor: pointer; 
+                    transition: all 0.3s ease; 
+                    border: none; 
+                    text-decoration: none; 
+                    display: inline-block; 
+                }
+                .btn-primary { 
+                    background: linear-gradient(135deg, #00ff99, #00ccff); 
+                    color: #000; 
+                }
+                .btn-primary:hover { 
+                    transform: translateY(-2px); 
+                    box-shadow: 0 8px 30px rgba(0,255,153,0.3); 
+                }
+                .btn-secondary { 
+                    background: rgba(255,255,255,0.08); 
+                    color: #fff; 
+                    border: 1px solid rgba(255,255,255,0.12); 
+                }
+                .btn-secondary:hover { 
+                    background: rgba(255,255,255,0.15); 
+                    transform: translateY(-2px); 
+                }
+                .footer { 
+                    margin-top: 28px; 
+                    color: #555; 
+                    font-size: 13px; 
+                    border-top: 1px solid rgba(255,255,255,0.05); 
+                    padding-top: 20px; 
+                    position: relative; 
+                    z-index: 1; 
+                }
+                .tiktok-link {
+                    display: inline-block;
+                    margin-top: 8px;
+                    padding: 8px 20px;
+                    background: linear-gradient(135deg, #00f2ea, #ff0050);
+                    color: white;
+                    text-decoration: none;
+                    border-radius: 50px;
+                    font-weight: 600;
+                    font-size: 14px;
+                    transition: all 0.3s ease;
+                }
+                .tiktok-link:hover {
+                    transform: scale(1.05);
+                    box-shadow: 0 4px 20px rgba(255, 0, 80, 0.3);
+                }
+                .highlight { 
+                    color: #00ff99; 
+                    font-weight: bold; 
+                }
                 ::-webkit-scrollbar { width: 6px; }
                 ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
                 ::-webkit-scrollbar-thumb { background: #00ff99; border-radius: 10px; }
@@ -685,67 +809,47 @@ app.get('/', (req, res) => {
                     font-weight: 700;
                     margin-left: 8px;
                 }
-                .route-examples {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 8px;
-                    justify-content: center;
-                    margin: 12px 0;
+                @media (max-width: 500px) { 
+                    .container { padding: 30px 20px; } 
+                    h1 { font-size: 30px; } 
+                    .logo { font-size: 56px; } 
                 }
-                .route-examples span {
-                    background: rgba(255,255,255,0.05);
-                    padding: 4px 12px;
-                    border-radius: 12px;
-                    font-size: 12px;
-                    color: #aaa;
-                    border: 1px solid rgba(255,255,255,0.05);
-                }
-                @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } .container { padding: 30px 20px; } h1 { font-size: 30px; } .logo { font-size: 56px; } }
             </style>
         </head>
         <body>
             <div class="container">
                 <span class="logo">🚀</span>
-                <h1>Proxy Server</h1>
-                <div class="status"><span class="dot"></span>Đang hoạt động</div>
+                <h1>CODE BY NHK</h1>
+                <div class="status">
+                    <span class="dot"></span>
+                    Online
+                </div>
                 <div class="info-grid">
-                    <div class="info-item"><span class="label">Trạng thái</span><span class="value">🟢 Online</span></div>
-                    <div class="info-item"><span class="label">Port</span><span class="value">${PORT}</span></div>
-                    <div class="info-item"><span class="label">URL mặc định</span><span class="value" style="font-size:11px;">minhtuanxrophim.vercel.app</span></div>
-                    <div class="info-item"><span class="label">Routes</span><span class="value">✅ Động + ${fixedRoutes.length} route cố định <span class="popup-badge">POPUP</span></span></div>
+                    <div class="info-item">
+                        <span class="label">Trạng thái</span>
+                        <span class="value">🟢 Đang hoạt động</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="label">TIKTOK</span>
+                        <span class="value">
+                            <a href="https://www.tiktok.com/@hoangg.huyy.nz" 
+                               target="_blank" 
+                               class="tiktok-link"
+                               onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 20px rgba(255,0,80,0.4)';"
+                               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none';">
+                                @hoangg.huyy.nz
+                            </a>
+                        </span>
+                    </div>
                 </div>
                 <div class="btn-group">
                     <a href="/proxy" class="btn btn-primary" target="_blank">🎬 Mở trang mặc định</a>
-                    <a href="/phimhay" class="btn btn-secondary" target="_blank">📺 Phim Hay</a>
                     <button onclick="customUrl()" class="btn btn-secondary">🔗 URL tùy chỉnh</button>
                 </div>
-                <div style="margin-top:20px;position:relative;z-index:1;">
-                    <div style="color:#888;font-size:14px;margin-bottom:10px;">
-                        <strong style="color:#00ccff;">🌍 Route động:</strong>
-                    </div>
-                    <div class="route-examples">
-                        <span>/quoc-gia/trung-quoc.trung-quoc</span>
-                        <span>/quoc-gia/han-quoc.han-quoc</span>
-                        <span>/the-loai/hanh-dong.hanh-dong</span>
-                        <span>/the-loai/tinh-cam.tinh-cam</span>
-                        <span>/phim/*</span>
-                        <span>/xem-phim/*</span>
-                    </div>
-                    <details>
-                        <summary style="color:#00ccff;cursor:pointer;font-size:14px;margin-top:10px;">📋 Route cố định (${fixedRoutes.length})</summary>
-                        <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px;max-height:200px;overflow-y:auto;padding:10px;">
-                            ${fixedRoutes.map(route => `
-                                <a href="${route}" target="_blank" style="background:rgba(255,255,255,0.05);padding:6px 14px;border-radius:12px;font-size:12px;color:#aaa;text-decoration:none;border:1px solid rgba(255,255,255,0.05);transition:0.3s;">${route}</a>
-                            `).join('')}
-                        </div>
-                    </details>
-                </div>
                 <div class="footer">
-                    <strong>Hướng dẫn:</strong><br>
-                    <code>/proxy?url=URL</code> - Lấy nội dung từ URL<br>
-                    <code>/quoc-gia/TEN_QUOC_GIA</code> - Xem phim theo quốc gia<br>
-                    <code>/the-loai/TEN_THE_LOAI</code> - Xem phim theo thể loại<br>
-                    <span class="highlight">✨ Hỗ trợ tất cả quốc gia và thể loại với route động!</span>
+                    <span class="highlight">✨ Proxy Server</span>
+                    <br>
+                    <span style="color: #666; font-size: 12px;">© NHK Proxy</span>
                 </div>
             </div>
             <script>
