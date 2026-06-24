@@ -25,101 +25,135 @@ function createPopupHTML(routeName = '') {
         left: 0;
         width: 100%;
         height: 100%;
-        background: rgba(0,0,0,0.7);
-        backdrop-filter: blur(10px);
+        background: rgba(0,0,0,0.75);
+        backdrop-filter: blur(12px);
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 999999;
-        animation: popupFadeIn 0.5s ease;
-        font-family: 'Segoe UI', Arial, sans-serif;
+        animation: popupFadeIn 0.6s ease;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     ">
         <div style="
-            background: linear-gradient(145deg, #1a1a2e, #16213e);
-            padding: 40px 50px;
-            border-radius: 24px;
-            border: 2px solid rgba(0,255,153,0.3);
-            box-shadow: 0 20px 60px rgba(0,255,153,0.15), inset 0 1px 0 rgba(255,255,255,0.05);
+            background: linear-gradient(145deg, #0f0f1a, #1a1a2e);
+            padding: 45px 50px;
+            border-radius: 28px;
+            border: 2px solid rgba(0,255,153,0.25);
+            box-shadow: 0 25px 70px rgba(0,255,153,0.12), inset 0 1px 0 rgba(255,255,255,0.05);
             text-align: center;
-            max-width: 450px;
-            width: 90%;
-            animation: popupScale 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            max-width: 460px;
+            width: 92%;
+            animation: popupScale 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
             position: relative;
             overflow: hidden;
         ">
+            <!-- Background glow -->
             <div style="
                 position: absolute;
                 top: -50%;
                 left: -50%;
                 width: 200%;
                 height: 200%;
-                background: radial-gradient(circle at 30% 50%, rgba(0,255,153,0.03), transparent 60%);
-                animation: popupGlow 4s ease-in-out infinite;
+                background: radial-gradient(circle at 30% 50%, rgba(0,255,153,0.04), transparent 60%);
+                animation: popupGlow 5s ease-in-out infinite;
                 pointer-events: none;
             "></div>
             
+            <!-- Icon -->
             <div style="
-                font-size: 60px;
-                margin-bottom: 16px;
+                font-size: 65px;
+                margin-bottom: 12px;
                 display: block;
-                animation: popupIcon 2s ease-in-out infinite;
+                animation: popupIcon 2.5s ease-in-out infinite;
+                position: relative;
+                z-index: 1;
             ">🚀</div>
             
+            <!-- Tiêu đề chính -->
             <div style="
-                font-size: 28px;
+                font-size: 30px;
                 font-weight: 800;
                 background: linear-gradient(135deg, #00ff99, #00ccff);
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;
-                margin-bottom: 8px;
-                letter-spacing: 1px;
+                margin-bottom: 4px;
+                letter-spacing: 1.5px;
+                position: relative;
+                z-index: 1;
             ">CODE BY NHK</div>
             
+            <!-- Divider -->
             <div style="
-                width: 60px;
+                width: 70px;
                 height: 3px;
                 background: linear-gradient(90deg, #00ff99, #00ccff);
-                margin: 12px auto;
-                border-radius: 2px;
+                margin: 10px auto 14px;
+                border-radius: 3px;
+                position: relative;
+                z-index: 1;
             "></div>
             
+            <!-- TikTok với link -->
             <div style="
                 color: #e0e0e0;
-                font-size: 16px;
-                line-height: 1.6;
-                margin: 16px 0 24px;
+                font-size: 17px;
+                line-height: 1.7;
+                margin: 8px 0 20px;
+                position: relative;
+                z-index: 1;
             ">
                 <span style="color: #00ff99; font-weight: 600;">✨ ${displayName}</span>
                 <br>
-                <span style="color: #888; font-size: 14px;">Đang tải nội dung...</span>
+                <a href="https://www.tiktok.com/@hoangg.huyy.nz" 
+                   target="_blank" 
+                   style="
+                       color: #ff0050;
+                       text-decoration: none;
+                       font-weight: 700;
+                       font-size: 19px;
+                       transition: all 0.3s ease;
+                       display: inline-block;
+                       margin-top: 4px;
+                   "
+                   onmouseover="this.style.color='#ff3385'; this.style.transform='scale(1.05)';"
+                   onmouseout="this.style.color='#ff0050'; this.style.transform='scale(1)';"
+                >
+                    📱 TikTok: @hoangg.huyy.nz
+                </a>
+                <br>
+                <span style="color: #888; font-size: 13px; display: block; margin-top: 4px;">Đang tải nội dung...</span>
             </div>
             
+            <!-- Nút OK -->
             <button onclick="closePopup()" style="
                 background: linear-gradient(135deg, #00ff99, #00ccff);
                 color: #000;
                 border: none;
-                padding: 12px 40px;
+                padding: 13px 45px;
                 border-radius: 50px;
-                font-size: 16px;
+                font-size: 17px;
                 font-weight: 700;
                 cursor: pointer;
                 transition: all 0.3s ease;
-                box-shadow: 0 4px 20px rgba(0,255,153,0.2);
+                box-shadow: 0 4px 25px rgba(0,255,153,0.25);
                 position: relative;
                 z-index: 1;
                 letter-spacing: 0.5px;
             "
-            onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 8px 30px rgba(0,255,153,0.4)';"
-            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 20px rgba(0,255,153,0.2)';"
+            onmouseover="this.style.transform='scale(1.06)'; this.style.boxShadow='0 8px 35px rgba(0,255,153,0.45)';"
+            onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 4px 25px rgba(0,255,153,0.25)';"
             >OK</button>
             
+            <!-- Footer -->
             <div style="
-                margin-top: 16px;
-                color: #555;
+                margin-top: 18px;
+                color: #444;
                 font-size: 11px;
-                letter-spacing: 2px;
+                letter-spacing: 2.5px;
                 text-transform: uppercase;
-            ">© NHK PROXY</div>
+                position: relative;
+                z-index: 1;
+            ">© NHK PROXY 2026</div>
         </div>
     </div>
     
@@ -130,7 +164,7 @@ function createPopupHTML(routeName = '') {
         }
         @keyframes popupScale {
             from { 
-                transform: scale(0.8) translateY(20px);
+                transform: scale(0.7) translateY(30px);
                 opacity: 0;
             }
             to { 
@@ -139,297 +173,59 @@ function createPopupHTML(routeName = '') {
             }
         }
         @keyframes popupIcon {
-            0%, 100% { transform: translateY(0) rotate(0deg); }
-            50% { transform: translateY(-8px) rotate(5deg); }
+            0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+            50% { transform: translateY(-10px) rotate(6deg) scale(1.05); }
         }
         @keyframes popupGlow {
             0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(10%, 10%) rotate(5deg); }
+            50% { transform: translate(8%, 8%) rotate(4deg); }
         }
         #proxyPopup button {
-            animation: popupBtnPulse 2s ease-in-out infinite;
+            animation: popupBtnPulse 2.5s ease-in-out infinite;
         }
         @keyframes popupBtnPulse {
-            0%, 100% { box-shadow: 0 4px 20px rgba(0,255,153,0.2); }
-            50% { box-shadow: 0 4px 35px rgba(0,255,153,0.5); }
+            0%, 100% { box-shadow: 0 4px 25px rgba(0,255,153,0.25); }
+            50% { box-shadow: 0 4px 40px rgba(0,255,153,0.5); }
+        }
+        /* Animation fade out */
+        @keyframes popupFadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.8); }
+        }
+        .popup-fade-out {
+            animation: popupFadeOut 0.4s ease forwards !important;
         }
     </style>
     
     <script>
         function closePopup() {
             const popup = document.getElementById('proxyPopup');
-            popup.style.animation = 'popupFadeOut 0.3s ease forwards';
-            setTimeout(() => {
-                popup.remove();
-            }, 300);
+            if (popup) {
+                popup.classList.add('popup-fade-out');
+                setTimeout(() => {
+                    if (popup.parentNode) popup.remove();
+                }, 400);
+            }
         }
         
-        const style = document.createElement('style');
-        style.textContent = \`
-            @keyframes popupFadeOut {
-                from { opacity: 1; }
-                to { opacity: 0; }
-            }
-        \`;
-        document.head.appendChild(style);
-        
-        // Tự động đóng popup sau 5 giây
+        // Tự động đóng sau 6 giây
         setTimeout(() => {
             const popup = document.getElementById('proxyPopup');
             if (popup) {
-                popup.style.animation = 'popupFadeOut 0.5s ease forwards';
+                popup.classList.add('popup-fade-out');
                 setTimeout(() => {
                     if (popup.parentNode) popup.remove();
-                }, 500);
+                }, 400);
             }
-        }, 5000);
-    </script>
-    `;
-}
-
-// ============ HÀM TẠO POPUP XỊN HƠN (giống mẫu) ============
-function createEnhancedPopupHTML(routeName = '') {
-    const displayName = routeName ? routeName.replace(/^\//, '').replace(/-/g, ' ').toUpperCase() : 'HỆ THỐNG';
-    
-    return `
-    <div id="proxyPopupEnhanced" style="
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.7);
-        backdrop-filter: blur(10px) saturate(1.4);
-        -webkit-backdrop-filter: blur(10px) saturate(1.4);
-        z-index: 999999;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        opacity: 1;
-        transition: opacity 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-        pointer-events: auto;
-        padding: 20px;
-        font-family: 'Inter', 'Segoe UI', Arial, sans-serif;
-    ">
-        <div style="
-            background: linear-gradient(145deg, #1a1a2e, #16213e);
-            border-radius: 48px;
-            padding: 40px 36px 36px;
-            max-width: 520px;
-            width: 100%;
-            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.06);
-            transform: scale(1) translateY(0);
-            animation: cardFloat 0.7s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-            transition: transform 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        ">
-            <!-- Hiệu ứng ánh sáng động -->
-            <div style="
-                position: absolute;
-                top: -50%;
-                left: -50%;
-                width: 200%;
-                height: 200%;
-                background: radial-gradient(circle at 30% 40%, rgba(255, 215, 0, 0.08), transparent 60%);
-                animation: shimmer 8s infinite alternate;
-                pointer-events: none;
-            "></div>
-            
-            <div style="position: relative; z-index: 2; text-align: center; color: #f0f0f5;">
-                <!-- Icon -->
-                <div style="
-                    font-size: 56px;
-                    background: linear-gradient(135deg, #f9d976, #f39c12);
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    color: transparent;
-                    margin-bottom: 12px;
-                    display: inline-block;
-                    filter: drop-shadow(0 8px 16px rgba(243, 156, 18, 0.3));
-                    animation: pulseGlow 2.5s infinite alternate;
-                ">
-                    <i class="fas fa-film" style="font-style: normal;">🎬</i>
-                </div>
-                
-                <h2 style="
-                    font-size: 28px;
-                    font-weight: 700;
-                    letter-spacing: -0.5px;
-                    background: linear-gradient(to right, #fff, #d4d4f0);
-                    -webkit-background-clip: text;
-                    background-clip: text;
-                    color: transparent;
-                    margin-bottom: 8px;
-                    line-height: 1.2;
-                ">${displayName}</h2>
-                
-                <div style="
-                    font-size: 16px;
-                    font-weight: 400;
-                    color: #b0b0d0;
-                    margin-bottom: 28px;
-                    letter-spacing: 0.2px;
-                    opacity: 0.9;
-                    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-                    padding-bottom: 20px;
-                ">
-                    <i class="fas fa-sparkles" style="color: #f1c40f; margin: 0 6px;">✨</i> 
-                    Trải nghiệm ngay 
-                    <i class="fas fa-sparkles" style="color: #f1c40f; margin: 0 6px;">✨</i>
-                </div>
-                
-                <!-- Code + TikTok -->
-                <div style="
-                    background: rgba(255, 255, 255, 0.04);
-                    backdrop-filter: blur(4px);
-                    border-radius: 32px;
-                    padding: 18px 16px;
-                    margin-bottom: 28px;
-                    border: 1px solid rgba(255, 255, 255, 0.06);
-                    transition: all 0.2s;
-                ">
-                    <div style="
-                        font-size: 20px;
-                        font-weight: 600;
-                        color: #f0f0ff;
-                        letter-spacing: 0.5px;
-                        margin-bottom: 10px;
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        gap: 10px;
-                        flex-wrap: wrap;
-                    ">
-                        <i class="fas fa-code" style="color: #f1c40f; font-size: 22px;">💻</i> 
-                        <span>Code BY: NHK</span>
-                    </div>
-                    <a href="https://www.tiktok.com/@hoangg.huyy.nz" 
-                       target="_blank" 
-                       rel="noopener noreferrer" 
-                       style="
-                           display: flex;
-                           align-items: center;
-                           justify-content: center;
-                           gap: 12px;
-                           background: rgba(0, 0, 0, 0.25);
-                           padding: 10px 16px;
-                           border-radius: 40px;
-                           margin-top: 6px;
-                           transition: 0.2s;
-                           text-decoration: none;
-                           color: #fff;
-                           font-size: 16px;
-                           font-weight: 500;
-                           border: 1px solid rgba(255, 255, 255, 0.05);
-                           backdrop-filter: blur(2px);
-                       "
-                       onmouseover="this.style.background='rgba(255, 0, 80, 0.12)'; this.style.borderColor='#ff0050'; this.style.transform='scale(1.02)';"
-                       onmouseout="this.style.background='rgba(0, 0, 0, 0.25)'; this.style.borderColor='rgba(255, 255, 255, 0.05)'; this.style.transform='scale(1)';"
-                    >
-                        <i class="fab fa-tiktok" style="font-size: 28px; color: #ff0050; filter: drop-shadow(0 0 8px rgba(255, 0, 80, 0.3)); transition: 0.2s;">🎵</i>
-                        <span><strong style="
-                            font-weight: 600;
-                            background: linear-gradient(135deg, #ff0050, #ff6b81);
-                            -webkit-background-clip: text;
-                            background-clip: text;
-                            color: transparent;
-                        ">TikTok</strong> · @hoangg.huyy.nz</span>
-                        <i class="fas fa-arrow-right" style="font-size: 14px; opacity: 0.7;">➜</i>
-                    </a>
-                </div>
-                
-                <!-- Nút OK -->
-                <button onclick="closeEnhancedPopup()" style="
-                    background: linear-gradient(135deg, #f1c40f, #f39c12);
-                    border: none;
-                    padding: 16px 28px;
-                    border-radius: 60px;
-                    font-size: 20px;
-                    font-weight: 700;
-                    color: #0a0a12;
-                    width: 100%;
-                    cursor: pointer;
-                    transition: all 0.25s cubic-bezier(0.23, 1, 0.32, 1);
-                    box-shadow: 0 12px 28px rgba(243, 156, 18, 0.3);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    gap: 12px;
-                    letter-spacing: 0.3px;
-                    border: 1px solid rgba(255, 255, 255, 0.15);
-                    backdrop-filter: blur(2px);
-                    margin-top: 6px;
-                "
-                onmouseover="this.style.transform='scale(1.03) translateY(-3px)'; this.style.boxShadow='0 20px 40px rgba(243, 156, 18, 0.5)'; this.style.background='linear-gradient(135deg, #f7dc6f, #f1c40f)';"
-                onmouseout="this.style.transform='scale(1) translateY(0)'; this.style.boxShadow='0 12px 28px rgba(243, 156, 18, 0.3)'; this.style.background='linear-gradient(135deg, #f1c40f, #f39c12)';"
-                >
-                    <i class="fas fa-check-circle" style="font-size: 22px; transition: 0.2s;">✅</i> OK · Vào xem ngay
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <style>
-        @keyframes cardFloat {
-            0% { opacity: 0; transform: scale(0.92) translateY(30px); }
-            100% { opacity: 1; transform: scale(1) translateY(0); }
-        }
-        @keyframes shimmer {
-            0% { transform: translateX(-10%) translateY(-10%); }
-            100% { transform: translateX(10%) translateY(10%); }
-        }
-        @keyframes pulseGlow {
-            0% { filter: drop-shadow(0 4px 12px rgba(243, 156, 18, 0.2)); }
-            100% { filter: drop-shadow(0 8px 28px rgba(243, 156, 18, 0.6)); }
-        }
-        @keyframes popupFadeOut {
-            from { opacity: 1; }
-            to { opacity: 0; }
-        }
-    </style>
-    
-    <script>
-        function closeEnhancedPopup() {
-            const popup = document.getElementById('proxyPopupEnhanced');
-            if (popup) {
-                popup.style.animation = 'popupFadeOut 0.5s ease forwards';
-                setTimeout(() => {
-                    if (popup.parentNode) popup.remove();
-                }, 500);
-            }
-        }
+        }, 6000);
         
-        // Tự động đóng popup sau 5 giây
-        setTimeout(() => {
-            const popup = document.getElementById('proxyPopupEnhanced');
-            if (popup) {
-                popup.style.animation = 'popupFadeOut 0.5s ease forwards';
-                setTimeout(() => {
-                    if (popup.parentNode) popup.remove();
-                }, 500);
-            }
-        }, 5000);
-        
-        // Bắt sự kiện ESC để đóng popup
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                const popup = document.getElementById('proxyPopupEnhanced');
-                if (popup) {
-                    closeEnhancedPopup();
-                }
-            }
-        });
-        
-        // Click ra ngoài card để đóng
+        // Đóng khi click ra ngoài
         document.addEventListener('click', function(e) {
-            const popup = document.getElementById('proxyPopupEnhanced');
+            const popup = document.getElementById('proxyPopup');
             if (popup && e.target === popup) {
-                closeEnhancedPopup();
+                closePopup();
             }
         });
-        
-        console.log('🎬 Phim Hay · Code BY: NHK · TikTok: @hoangg.huyy.nz');
     </script>
     `;
 }
@@ -453,9 +249,7 @@ async function fetchAndFixHtml(targetUrl, baseUrl = 'https://minhtuanxrophim.ver
     });
 
     let html = response.data;
-    
-    // Sử dụng popup nâng cao
-    const popupHTML = createEnhancedPopupHTML(routeName);
+    const popupHTML = createPopupHTML(routeName);
     
     const fixScript = `
     <script>
@@ -472,12 +266,25 @@ async function fetchAndFixHtml(targetUrl, baseUrl = 'https://minhtuanxrophim.ver
         
         console.log('✅ Proxy fix applied');
         
+        function showPopup() {
+            ${popupHTML.replace(/<\/script>/g, '<\\/script>').replace(/\\/g, '\\\\')}
+        }
+        
         document.addEventListener('DOMContentLoaded', function() {
-            ${popupHTML.replace(/<\/script>/g, '<\\/script>')}
+            showPopup();
         });
         
         if (document.readyState === 'complete' || document.readyState === 'interactive') {
-            ${popupHTML.replace(/<\/script>/g, '<\\/script>')}
+            setTimeout(showPopup, 100);
+        }
+        
+        // Fix cho trang load nhanh
+        if (document.readyState === 'loading') {
+            document.addEventListener('readystatechange', function() {
+                if (document.readyState === 'complete' || document.readyState === 'interactive') {
+                    setTimeout(showPopup, 100);
+                }
+            });
         }
     </script>
     `;
@@ -485,9 +292,7 @@ async function fetchAndFixHtml(targetUrl, baseUrl = 'https://minhtuanxrophim.ver
     html = html.replace(/<head>/i, `<head>
         <base href="${baseUrl}/">
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-        <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         ${fixScript}
     `);
     
@@ -573,7 +378,7 @@ app.get('/images/*', async (req, res) => {
     }
 });
 
-// ============ ROUTE ĐỘNG CHO QUỐC GIA - FIX ============
+// ============ ROUTE ĐỘNG CHO QUỐC GIA ============
 app.get('/quoc-gia/:country', async (req, res) => {
     try {
         const countryPath = req.params.country || '';
@@ -609,7 +414,7 @@ app.get('/quoc-gia/:country', async (req, res) => {
     }
 });
 
-// ============ ROUTE ĐỘNG CHO THỂ LOẠI - FIX ============
+// ============ ROUTE ĐỘNG CHO THỂ LOẠI ============
 app.get('/the-loai/:genre', async (req, res) => {
     try {
         const genrePath = req.params.genre || '';
@@ -751,4 +556,234 @@ app.get('/manifest.json', async (req, res) => {
         const targetUrl = 'https://minhtuanxrophim.vercel.app/manifest.json';
         const response = await axios.get(targetUrl, {
             headers: {
-                'User-Agent': 'Mozilla/5.0
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            },
+            httpsAgent: new (require('https').Agent)({
+                rejectUnauthorized: false
+            })
+        });
+        res.setHeader('Content-Type', 'application/json');
+        res.send(response.data);
+    } catch (error) {
+        res.status(404).send('Manifest not found');
+    }
+});
+
+app.get('/robots.txt', async (req, res) => {
+    try {
+        const targetUrl = 'https://minhtuanxrophim.vercel.app/robots.txt';
+        const response = await axios.get(targetUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            },
+            httpsAgent: new (require('https').Agent)({
+                rejectUnauthorized: false
+            })
+        });
+        res.setHeader('Content-Type', 'text/plain');
+        res.send(response.data);
+    } catch (error) {
+        res.status(404).send('robots.txt not found');
+    }
+});
+
+app.get('/sitemap.xml', async (req, res) => {
+    try {
+        const targetUrl = 'https://minhtuanxrophim.vercel.app/sitemap.xml';
+        const response = await axios.get(targetUrl, {
+            headers: {
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+            },
+            httpsAgent: new (require('https').Agent)({
+                rejectUnauthorized: false
+            })
+        });
+        res.setHeader('Content-Type', 'application/xml');
+        res.send(response.data);
+    } catch (error) {
+        res.status(404).send('sitemap.xml not found');
+    }
+});
+
+// ============ TRANG CHỦ ============
+app.get('/', (req, res) => {
+    res.send(`
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Proxy Server</title>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+                * { margin:0; padding:0; box-sizing:border-box; }
+                body {
+                    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    min-height: 100vh;
+                    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+                    color: white;
+                    padding: 20px;
+                }
+                .container {
+                    text-align: center;
+                    padding: 50px;
+                    background: rgba(255,255,255,0.03);
+                    border-radius: 24px;
+                    border: 1px solid rgba(255,255,255,0.08);
+                    max-width: 800px;
+                    width: 100%;
+                    position: relative;
+                    overflow: hidden;
+                }
+                .container::before {
+                    content: '';
+                    position: absolute;
+                    top: -50%;
+                    left: -50%;
+                    width: 200%;
+                    height: 200%;
+                    background: radial-gradient(circle at 30% 50%, rgba(0,255,153,0.03), transparent 60%);
+                    animation: bgGlow 8s ease-in-out infinite;
+                    pointer-events: none;
+                }
+                @keyframes bgGlow {
+                    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+                    50% { transform: translate(5%, 5%) rotate(3deg); }
+                }
+                .logo { font-size: 72px; margin-bottom: 16px; display: block; animation: float 3s ease-in-out infinite; position: relative; z-index: 1; }
+                @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+                h1 { font-size: 42px; background: linear-gradient(135deg, #00ff99, #00ccff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 12px; position: relative; z-index: 1; }
+                .status { color: #00ff99; font-size: 18px; margin: 16px 0; display: flex; align-items: center; justify-content: center; gap: 8px; position: relative; z-index: 1; }
+                .status .dot { width: 10px; height: 10px; background: #00ff99; border-radius: 50%; display: inline-block; animation: pulse 2s infinite; }
+                @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+                .info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 24px 0; text-align: left; position: relative; z-index: 1; }
+                .info-item { background: rgba(255,255,255,0.05); padding: 16px 20px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); transition: 0.3s; }
+                .info-item:hover { background: rgba(255,255,255,0.08); border-color: rgba(0,255,153,0.2); }
+                .info-item .label { color: #888; font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+                .info-item .value { color: #00ccff; font-family: monospace; font-size: 14px; margin-top: 6px; display: block; }
+                .btn-group { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 24px; position: relative; z-index: 1; }
+                .btn { padding: 14px 36px; border-radius: 50px; font-weight: 600; font-size: 15px; cursor: pointer; transition: all 0.3s ease; border: none; text-decoration: none; display: inline-block; }
+                .btn-primary { background: linear-gradient(135deg, #00ff99, #00ccff); color: #000; }
+                .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(0,255,153,0.3); }
+                .btn-secondary { background: rgba(255,255,255,0.08); color: #fff; border: 1px solid rgba(255,255,255,0.12); }
+                .btn-secondary:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+                .footer { margin-top: 28px; color: #555; font-size: 13px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 20px; position: relative; z-index: 1; }
+                .footer code { background: rgba(255,255,255,0.08); padding: 2px 8px; border-radius: 4px; font-size: 12px; color: #888; }
+                .highlight { color: #00ff99; font-weight: bold; }
+                ::-webkit-scrollbar { width: 6px; }
+                ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); border-radius: 10px; }
+                ::-webkit-scrollbar-thumb { background: #00ff99; border-radius: 10px; }
+                .popup-badge {
+                    display: inline-block;
+                    background: linear-gradient(135deg, #00ff99, #00ccff);
+                    color: #000;
+                    padding: 4px 12px;
+                    border-radius: 20px;
+                    font-size: 11px;
+                    font-weight: 700;
+                    margin-left: 8px;
+                }
+                .route-examples {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 8px;
+                    justify-content: center;
+                    margin: 12px 0;
+                }
+                .route-examples span {
+                    background: rgba(255,255,255,0.05);
+                    padding: 4px 12px;
+                    border-radius: 12px;
+                    font-size: 12px;
+                    color: #aaa;
+                    border: 1px solid rgba(255,255,255,0.05);
+                }
+                @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } .container { padding: 30px 20px; } h1 { font-size: 30px; } .logo { font-size: 56px; } }
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <span class="logo">🚀</span>
+                <h1>Proxy Server</h1>
+                <div class="status"><span class="dot"></span>Đang hoạt động</div>
+                <div class="info-grid">
+                    <div class="info-item"><span class="label">Trạng thái</span><span class="value">🟢 Online</span></div>
+                    <div class="info-item"><span class="label">Port</span><span class="value">${PORT}</span></div>
+                    <div class="info-item"><span class="label">URL mặc định</span><span class="value" style="font-size:11px;">minhtuanxrophim.vercel.app</span></div>
+                    <div class="info-item"><span class="label">Routes</span><span class="value">✅ Động + ${fixedRoutes.length} route cố định <span class="popup-badge">POPUP</span></span></div>
+                </div>
+                <div class="btn-group">
+                    <a href="/proxy" class="btn btn-primary" target="_blank">🎬 Mở trang mặc định</a>
+                    <a href="/phimhay" class="btn btn-secondary" target="_blank">📺 Phim Hay</a>
+                    <button onclick="customUrl()" class="btn btn-secondary">🔗 URL tùy chỉnh</button>
+                </div>
+                <div style="margin-top:20px;position:relative;z-index:1;">
+                    <div style="color:#888;font-size:14px;margin-bottom:10px;">
+                        <strong style="color:#00ccff;">🌍 Route động:</strong>
+                    </div>
+                    <div class="route-examples">
+                        <span>/quoc-gia/trung-quoc.trung-quoc</span>
+                        <span>/quoc-gia/han-quoc.han-quoc</span>
+                        <span>/the-loai/hanh-dong.hanh-dong</span>
+                        <span>/the-loai/tinh-cam.tinh-cam</span>
+                        <span>/phim/*</span>
+                        <span>/xem-phim/*</span>
+                    </div>
+                    <details>
+                        <summary style="color:#00ccff;cursor:pointer;font-size:14px;margin-top:10px;">📋 Route cố định (${fixedRoutes.length})</summary>
+                        <div style="display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:10px;max-height:200px;overflow-y:auto;padding:10px;">
+                            ${fixedRoutes.map(route => `
+                                <a href="${route}" target="_blank" style="background:rgba(255,255,255,0.05);padding:6px 14px;border-radius:12px;font-size:12px;color:#aaa;text-decoration:none;border:1px solid rgba(255,255,255,0.05);transition:0.3s;">${route}</a>
+                            `).join('')}
+                        </div>
+                    </details>
+                </div>
+                <div class="footer">
+                    <strong>Hướng dẫn:</strong><br>
+                    <code>/proxy?url=URL</code> - Lấy nội dung từ URL<br>
+                    <code>/quoc-gia/TEN_QUOC_GIA</code> - Xem phim theo quốc gia<br>
+                    <code>/the-loai/TEN_THE_LOAI</code> - Xem phim theo thể loại<br>
+                    <span class="highlight">✨ Hỗ trợ tất cả quốc gia và thể loại với route động!</span>
+                </div>
+            </div>
+            <script>
+                function customUrl() {
+                    const url = prompt('Nhập URL cần lấy:', 'https://minhtuanxrophim.vercel.app/phimhay');
+                    if (url) { window.open('/proxy?url=' + encodeURIComponent(url), '_blank'); }
+                }
+            </script>
+        </body>
+        </html>
+    `);
+});
+
+// ============ 404 ============
+app.use((req, res) => {
+    res.status(404).send(`
+        <!DOCTYPE html>
+        <html>
+        <head><title>404</title></head>
+        <body style="font-family:Arial;text-align:center;padding:50px;background:#1a1a2e;color:white;">
+            <h1 style="color:#ff6b6b;">404 - Không tìm thấy</h1>
+            <p>Đường dẫn "${req.url}" không tồn tại.</p>
+            <p style="color:#888;font-size:14px;margin-top:10px;">
+                <strong style="color:#00ff99;">Các route hợp lệ:</strong>
+                <br>
+                <span style="color:#00ccff;">/quoc-gia/[tên quốc gia]</span>
+                <br>
+                <span style="color:#00ccff;">/the-loai/[tên thể loại]</span>
+                <br>
+                <span style="color:#ff6b6b;">/phim/[slug]</span>
+                <br>
+                <span style="color:#ffd93d;">/xem-phim/[slug]</span>
+            </p>
+            <a href="/" style="color:#00ff99;">Quay lại trang chủ</a>
+        </body>
+        </html>
+    `);
+});
+
+// ============ EXPORT CHO VERCEL ============
+module.exports = app;
